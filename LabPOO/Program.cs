@@ -20,7 +20,7 @@ namespace LabPOO
 
         //**********************************************************************************************************************************************************************
         //  DIRECCION DEL ARCHIVO:   |                       PATH                        |           NAME          |
-        const string NombreArchivo = @"C:\Users\ING\Desktop\big-sister-SantiagoFigueroaMc\big_sister_serialized.bin";//Cambia esta ruta.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        const string NombreArchivo = "..\\big_sister_serialized.bin";//Cambia esta ruta.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         //**********************************************************************************************************************************************************************
 
         public static List<Product> cart;
