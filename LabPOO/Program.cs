@@ -17,8 +17,11 @@ namespace LabPOO
         {
             cart[cart.Count() - 1] = null;// Quita el ultimo elemento del carrito
         }
-        
-        const string NombreArchivo = @"C:\Users\ING\Desktop\big-sister-SantiagoFigueroaMc\big_sister_serialized.bin";//Cambia esta ruta.
+
+        //**********************************************************************************************************************************************************************
+        //  DIRECCION DEL ARCHIVO:   |                       PATH                        |           NAME          |
+        const string NombreArchivo = @"C:\Users\ING\Desktop\big-sister-SantiagoFigueroaMc\big_sister_serialized.bin";//Cambia esta ruta.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        //**********************************************************************************************************************************************************************
 
         public static List<Product> cart;
         public static List<Product> market;
