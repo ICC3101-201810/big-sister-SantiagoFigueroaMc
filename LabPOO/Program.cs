@@ -4,19 +4,46 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 
 namespace LabPOO
 {
     class Program
     {
+        public delegate void candaceDelegate(object sender, List<string> lista_compras, string objeto_añadido);
+        public void Candace (object sender,List<string> lista_compras, string objeto_añadido)
+        {
+            cart[cart.Count() - 1] = null;// Quita el ultimo elemento del carrito
+        }
+        
+        const string NombreArchivo = @"C:\Users\ING\Desktop\big-sister-SantiagoFigueroaMc\big_sister_serialized.bin";//Cambia esta ruta.
+
         public static List<Product> cart;
         public static List<Product> market;
+        public static List<string> productos_receta;
 
         static void Main(string[] args)
         {
-            cart = new List<Product>();
             market = new List<Product>();
+            productos_receta =  new List<string> {"láminas de lasaña", "parmesano rallado", "mantequilla", "carne molida",
+                                "vino blanco", "tomates pelados en lata", "zanahoria", "cebolla", "Aceite de oliva",
+                                "Sal", "Pimienta", "mantequilla", "harina", "leche", "Pimienta" };
             SupplyStore();
+
+            if (File.Exists(NombreArchivo))
+            {
+                IFormatter formatter = new BinaryFormatter();
+                Stream stream = new FileStream(NombreArchivo, FileMode.Open, FileAccess.Read, FileShare.Read);
+                cart = (List<Product>)formatter.Deserialize(stream);
+                stream.Close();
+            }
+            else
+            {
+                cart = new List<Product>();
+            }
+
             while (true)
             {
                 PrintHeader();
@@ -46,15 +73,21 @@ namespace LabPOO
                     }
                     else if (answer == "4")
                     {
-                        Pay();
+                        Pay();//Aquí el programa se puede cerrar sin tener que serializarse
                         break;
                     }
                     else if (answer == "5")
                     {
-                        Environment.Exit(1);
+                        IFormatter formatte = new BinaryFormatter();
+                        Stream strea = new FileStream(NombreArchivo, FileMode.Create, FileAccess.Write, FileShare.None);
+                        formatte.Serialize(strea, cart);
+                        strea.Close();
+                        Environment.Exit(1);// Aquí hay que serializar
                     }
                 }
             }
+
+            
         }
 
         public static void Pay()
@@ -92,7 +125,7 @@ namespace LabPOO
                     {
                         continue;
                     }
-                    AddToCart(market[answer]);
+                    AddToCart(market[answer]);// Aquí se están agregando las cosas al carrito
                     break;
                 }
                 catch
@@ -100,7 +133,7 @@ namespace LabPOO
                     continue;
                 }
             }           
-        }
+        }// En esta función se agregar cosas al carro
 
         public static void PrintCart()
         {
@@ -191,5 +224,6 @@ namespace LabPOO
                 response = Console.ReadKey(true);
             }
         }
+        
     }
 }

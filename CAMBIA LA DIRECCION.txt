@@ -1,0 +1,2 @@
+Hay que cambiar la direccion donde se crea el archivo .bin
+Está en la linea 21 de Program.cs
